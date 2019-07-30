@@ -1,0 +1,19 @@
+---
+vagrant:
+  box: pe-puppet-learning-vm.box
+  box_check_update: true
+  ssh_insert_key: true
+  auto_update: true
+  min_memory: 4096
+  min_cores: 2
+
+puppetmaster:
+  hostname: puppetmaster
+  memory: 4096
+  cores: 2
+
+instances:
+  - box: ubuntu/bionic64
+    hostname: ubuntu-node
+    memory: 1024
+    cores: 1
