@@ -1,0 +1,1 @@
+# Puppet learning VM
