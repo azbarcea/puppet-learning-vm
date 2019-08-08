@@ -53,3 +53,7 @@ build-iPhoneSimulator/
 *.zip
 *.ova
 *.box
+
+# Local vagrant.yaml
+/vagrant.yaml
+# Local properties for 
