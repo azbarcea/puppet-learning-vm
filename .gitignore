@@ -48,3 +48,8 @@ build-iPhoneSimulator/
 
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
+
+# Archives, VM images and Vagrant images
+*.zip
+*.ova
+*.box
