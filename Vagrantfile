@@ -1,10 +1,9 @@
 # vim: set filetype=ruby:
 
-require 'pp'
 require 'yaml'
-require 'json'
 require 'vagrant-hostmanager'
 require 'vagrant-vbguest' unless defined? VagrantVbguest::Config
+#require 'pp'
 
 # Load configuration data from 'vagrant.yaml'
 configuration_file = File.expand_path("vagrant.yaml", File.dirname(__FILE__))
@@ -13,12 +12,7 @@ settings = configuration['vagrant']
 puppetmaster = configuration['puppetmaster']
 instances = configuration['instances']
 
-pp puppetmaster
-
-configuration.each do |key, value|
-  puts "#{key}:#{value}"
-end
-
+# Create environment
 Vagrant.configure("2") do |config|
 
   def check_dependency(plugin_name)
@@ -46,6 +40,14 @@ Vagrant.configure("2") do |config|
 
   # configure shared folder - for Development
   config.vm.synced_folder ".", "/vagrant", disabled: true
+
+  if settings.has_key? 'hostmanager' and settings['hostmanager']
+    config.hostmanager.enabled = true
+    config.hostmanager.manage_host = true
+    config.hostmanager.manage_guest = true
+    config.hostmanager.ignore_private_ip = false
+    config.hostmanager.include_offline = true
+  end # end hostmanager
 
   unless puppetmaster.has_key? 'deactivated' or puppetmaster['deactivated']
 

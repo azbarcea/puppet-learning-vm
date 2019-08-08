@@ -6,6 +6,7 @@ vagrant:
   auto_update: true
   min_memory: 4096
   min_cores: 2
+  hostmanager: true
 
 puppetmaster:
   hostname: puppetmaster
@@ -14,6 +15,13 @@ puppetmaster:
 
 instances:
   - box: ubuntu/bionic64
-    hostname: ubuntu-node
+    hostname: puppet-ua01
     memory: 1024
     cores: 1
+    deactivated: true
+
+  - box: centos/7
+    hostname: puppet-uc02
+    memory: 1024
+    cores: 1
+    deactivated: true
