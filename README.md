@@ -19,9 +19,16 @@ To `ssh` into the box:
 vagrant ssh puppetmaster
 ```
 
-To use the UI, go to: https://puppetmaster/. This is possible because on `linux` (if your machine is `linux`) or `macos`, for your convenience, `vagrant` will use the `hostmanager` plugin to add the node to your `/etc/hosts` file.
+To use the UI, go to: https://puppetmaster/. You should be able to see:
+```
+Quest Guide for the Puppet Learning VM
+```
+
+This is possible because on `linux` (if your machine is `linux`) or `macos`, for your convenience, `vagrant` will use the `hostmanager` plugin to add the node to your `/etc/hosts` file.
 
 By default, the VM will be created in a NAT network, so `hostmanager` will use the internal routing to get to your node. The node is setup to use `dhcp` (by default). You can change this by modifying in `vagrant.yaml` the `private_ip` field.
+
+The image is based on `CentOS Linux 7 (Core)` and the default clients are abstracted as `docker` containers.
 
 ## Official Learning VMs
 
