@@ -2,6 +2,27 @@
 
 Learn / Spike (research) / Dev Puppet environment based on the official Puppet learning VM
 
+## Using the VM
+
+Setup your environment (how many VMs you want)
+```bash
+cp vagrant.yaml.example vagrant.yaml
+```
+
+To spin up a puppet master:
+```bash
+vagrant up puppetmaster
+```
+
+To `ssh` into the box:
+```
+vagrant ssh puppetmaster
+```
+
+To use the UI, go to: https://puppetmaster/. This is possible because on `linux` (if your machine is `linux`) or `macos`, for your convenience, `vagrant` will use the `hostmanager` plugin to add the node to your `/etc/hosts` file.
+
+By default, the VM will be created in a NAT network, so `hostmanager` will use the internal routing to get to your node. The node is setup to use `dhcp` (by default). You can change this by modifying in `vagrant.yaml` the `private_ip` field.
+
 ## Official Learning VMs
 
 <details>
