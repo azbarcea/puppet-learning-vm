@@ -56,7 +56,13 @@ To use the Puppet Console UI, go to https://172.28.128.8/ (replace with your own
 Overview
 ```
 
+Login using the default credentials:
+* username: `admin`
+* password: `puppetlabs`
+
 ### Alternative - using `hostmanager`
+
+For this, you need to enable `hostmanager: true` in `vagrant.yaml`
 
 To use the Quest Guide UI, go to: http://puppetmaster/. You should be able to see:
 ```
