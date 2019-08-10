@@ -2,6 +2,9 @@
 
 Learn / Spike (research) / Dev Puppet environment based on the official Puppet learning VM
 
+
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+
 ## Using the VM
 
 Setup your environment (how many VMs you want)
@@ -19,9 +22,13 @@ To `ssh` into the box:
 vagrant ssh puppetmaster
 ```
 
-To use the UI, go to: https://puppetmaster/. You should be able to see:
+To use the Quest Guide UI, go to: http://puppetmaster/. You should be able to see:
 ```
 Quest Guide for the Puppet Learning VM
+```
+To use the Puppet Console UI, go to https://puppetmaster/ and accept the self-signed certificate. You should be able to see:
+```
+Overview
 ```
 
 This is possible because on `linux` (if your machine is `linux`) or `macos`, for your convenience, `vagrant` will use the `hostmanager` plugin to add the node to your `/etc/hosts` file.
@@ -79,7 +86,30 @@ After unziping it, there is an `.ova` image. Import it into VirtualBox:
 VBoxManage import puppet-2019.0.2-learning-6.10.ova --vsys 0 --eula accept --vsys 0 --vmname "puppet-learning-vm-2019.0" --settingsfile "puppet-learning-vm"
 ```
 
-Get the VM UUID and package it
+List all your VMs and retrieve the `puppet-learning-vm`:
+```bash
+$ # list all your VMs
+$ VBoxManage list --sorted vms
+"puppet-learning-vm-2019.0" {28f73b71-7b70-4838-800b-d67400593594}
+$ # list only the puppet-learning-vm-2019.0 VM
+$ VBoxManage list --sorted vms | grep 'puppet-learning-vm-2019.0'
+"puppet-learning-vm-2019.0" {28f73b71-7b70-4838-800b-d67400593594}
+$ # list only the VM ID
+$ VBoxManage list --sorted vms | grep 'puppet-learning-vm-2019.0' | awk '{print $2}' | cut -d '{' -f2 | cut -d '}' -f1
+28f73b71-7b70-4838-800b-d67400593594
+```
+
+Package the VM:
+```bash
+vagrant package --base '28f73b71-7b70-4838-800b-d67400593594' --output puppet-learning-vm.box
+```
+
+_Optimization_: If you want to do it in oneshot, to get the VM UUID and package it as a `.box` (vagrant image) file:
 ```bash
 vagrant package --base $(VBoxManage list --sorted vms | grep 'puppet-learning-vm-2019.0' | awk '{print $2}' | cut -d '{' -f2 | cut -d '}' -f1) --output puppet-learning-vm.box
+```
+
+Import the `.box` into vagrant to be used:
+```
+vagrant box add puppet-learning-vm-2019.0 puppet-learning-vm-2019.0.box
 ```

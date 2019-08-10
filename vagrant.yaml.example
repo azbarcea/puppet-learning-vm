@@ -1,6 +1,6 @@
 ---
 vagrant:
-  box: pe-puppet-learning-vm.box
+  box: puppet-learning-vm-2019.0
   box_check_update: true
   ssh_insert_key: true
   auto_update: true
@@ -9,7 +9,7 @@ vagrant:
   hostmanager: true
 
 puppetmaster:
-  hostname: puppetmaster
+  hostname: learning
   memory: 4096
   cores: 2
 
