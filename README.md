@@ -1,7 +1,10 @@
 # Puppet learning VM
 
-Learn / Spike (research) / Dev Puppet environment based on the official Puppet learning VM
+Learn / Spike (research) / Dev Puppet environment based on the official Puppet learning VM. 
 
+<img src='https://upload.wikimedia.org/wikipedia/en/0/09/Puppet%27s_company_logo.png' width='200px'>
+
+> Puppet is an open-core software configuration management tool. It runs on many Unix-like systems as well as on Microsoft Windows, and includes its own declarative language to describe system configuration. It is written in C++, Clojure and Ruby, with its free-software version released under the Apache License 2.0 - [wikipedia](https://en.wikipedia.org/wiki/Puppet_(company)#Puppet)
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
@@ -14,13 +17,46 @@ cp vagrant.yaml.example vagrant.yaml
 
 To spin up a puppet master:
 ```bash
-vagrant up puppetmaster
+vagrant up learning
 ```
 
 To `ssh` into the box:
 ```
-vagrant ssh puppetmaster
+vagrant ssh learning
 ```
+
+Once `ssh` into the `learning` VM you can get root by:
+```
+[vagrant@learning ~]$ sudo su -
+root@learning: # ip addr show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group (...)
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:b9:88:bd brd ff:ff:ff:ff:ff:ff
+    inet 10.0.2.15/24 brd 10.0.2.255 scope global noprefixroute dynamic eth0
+       valid_lft 85677sec preferred_lft 85677sec
+    inet6 fe80::752c:860f:3985:c1a2/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:68:fe:a9 brd ff:ff:ff:ff:ff:ff
+    inet 172.28.128.8/24 brd 172.28.128.255 scope global noprefixroute dynamic eth1
+       valid_lft 1048sec preferred_lft 1048sec
+    inet6 fe80::a00:27ff:fe68:fea9/64 scope link 
+       valid_lft forever preferred_lft forever
+(...)
+```
+
+`172.28.128.8` from `eth1` is the IP that you care. Everytime you reboot the VM, you may get a different IP.
+
+To use the Quest Guide UI, go to: http://172.28.128.8/ (replace with your own IP). You should be able to see:
+```
+Quest Guide for the Puppet Learning VM
+```
+To use the Puppet Console UI, go to https://172.28.128.8/ (replace with your own IP) and accept the self-signed certificate. You should be able to see:
+```
+Overview
+```
+
+### Alternative - using `hostmanager`
 
 To use the Quest Guide UI, go to: http://puppetmaster/. You should be able to see:
 ```
@@ -111,5 +147,14 @@ vagrant package --base $(VBoxManage list --sorted vms | grep 'puppet-learning-vm
 
 Import the `.box` into vagrant to be used:
 ```
-vagrant box add puppet-learning-vm-2019.0 puppet-learning-vm-2019.0.box
+vagrant add 
+```
+
+# Known Issues
+
+* You need to enable virtualization in your BIOS for Virtualbox to work
+* On Windows, you need to disable Hyper-V from Windows Features for Virtualbox to work
+* Encountered issues when `Guest GuestAdditions` was upgraded. This depends on your host Virtualbox and how much is up-to-date.
+```
+GuestAdditions versions on your host (6.0.10) and guest (6.0.6) do not match
 ```

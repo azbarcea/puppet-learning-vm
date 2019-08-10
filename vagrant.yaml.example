@@ -1,12 +1,12 @@
 ---
 vagrant:
-  box: puppet-learning-vm-2019.0
+  box: azbarcea/puppet-learning-vm-2019.0
   box_check_update: true
   ssh_insert_key: true
   auto_update: true
   min_memory: 4096
   min_cores: 2
-  hostmanager: true
+  hostmanager: false
 
 puppetmaster:
   hostname: learning
