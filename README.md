@@ -145,10 +145,12 @@ _Optimization_: If you want to do it in oneshot, to get the VM UUID and package 
 vagrant package --base $(VBoxManage list --sorted vms | grep 'puppet-learning-vm-2019.0' | awk '{print $2}' | cut -d '{' -f2 | cut -d '}' -f1) --output puppet-learning-vm.box
 ```
 
-Import the `.box` into vagrant to be used:
+Publishing the `.box`:
+```bash
+vagrant cloud publish --box-version 6.10-0 azbarcea/puppet-learning-vm-2019.0 --release --description "Puppet learning VM containing the Quest to learn (https://puppet.com/blog/quest-to-learn-puppet-new-learning-vm)" --short-description "Puppet learning VM for PE 2019.0" --version-description "Based on the official puppet-2019.0.2-learning-6.10.ova from learning_puppet_vm-6.10.zip" 6.10-0 virtualbox puppet-learning-vm-2019.0.box
 ```
-vagrant add 
-```
+
+The version `6.10-0` was used because `6.10` comes from the official `puppet-2019.0.2-learning-6.10.ova` (within `learning_puppet_vm-6.10.zip`) and `0` is the current `.box` packaging. 
 
 # Known Issues
 
