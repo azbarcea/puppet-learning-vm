@@ -28,6 +28,13 @@ vagrant ssh learning
 Once `ssh` into the `learning` VM you can get root by:
 ```
 [vagrant@learning ~]$ sudo su -
+```
+You can retrieve the NAT (private IP) by:
+```
+facter networking.interfaces.eth1.ip
+```
+Or classic way:
+```
 root@learning: # ip addr show
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group (...)
 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
@@ -165,4 +172,16 @@ The version `6.10-0` was used because `6.10` comes from the official `puppet-201
 * Encountered issues when `Guest GuestAdditions` was upgraded. This depends on your host Virtualbox and how much is up-to-date.
 ```
 GuestAdditions versions on your host (6.0.10) and guest (6.0.6) do not match
+```
+* No IP for `eth1`, you'll see something like:
+```
+3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:68:fe:a9 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::a00:27ff:fe68:fea9/64 scope link 
+       valid_lft forever preferred_lft forever
+```
+In this case just restart the VM:
+```
+vagrant halt
+vagrant up
 ```
