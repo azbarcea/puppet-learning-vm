@@ -186,5 +186,10 @@ vagrant halt
 vagrant up
 ```
 
+# References
+
+* [puppet-in-docker][https://github.com/puppetlabs/puppet-in-docker]
+
+
 [website-url]: https://puppet.com/download-learning-vm
 [website-badge]: https://upload.wikimedia.org/wikipedia/en/0/09/Puppet%27s_company_logo.png
