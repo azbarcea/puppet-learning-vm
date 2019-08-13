@@ -1,4 +1,4 @@
-# Puppet learning VM
+# [Puppet learning VM][website-url]
 
 Learn / Spike (research) / Dev Puppet environment based on the official Puppet learning VM. 
 
@@ -54,7 +54,7 @@ root@learning: # ip addr show
 
 `172.28.128.8` from `eth1` is the IP that you care. Everytime you reboot the VM, you may get a different IP.
 
-To use the Quest Guide UI, go to: http://172.28.128.8/ (replace with your own IP). You should be able to see:
+To use the [Quest Guide UI](https://github.com/puppetlabs/puppet-quest-guide), go to: http://172.28.128.8/ (replace with your own IP). You should be able to see:
 ```
 Quest Guide for the Puppet Learning VM
 ```
@@ -185,3 +185,6 @@ In this case just restart the VM:
 vagrant halt
 vagrant up
 ```
+
+[website-url]: https://puppet.com/download-learning-vm
+[website-badge]: https://upload.wikimedia.org/wikipedia/en/0/09/Puppet%27s_company_logo.png
