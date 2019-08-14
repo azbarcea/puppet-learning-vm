@@ -17,7 +17,7 @@ cp vagrant.yaml.example vagrant.yaml
 
 To spin up a puppet master:
 ```bash
-vagrant up learning
+vagrant up
 ```
 
 To `ssh` into the box:
@@ -190,6 +190,10 @@ vagrant up
 
 * [puppet-in-docker][https://github.com/puppetlabs/puppet-in-docker]
 
+----
 
 [website-url]: https://puppet.com/download-learning-vm
 [website-badge]: https://upload.wikimedia.org/wikipedia/en/0/09/Puppet%27s_company_logo.png
+[puppet-forge-server]: https://github.com/kjhenner/puppet-forge-server.git
+[pltraining-dockeragent]: https://github.com/puppetlabs/pltraining-dockeragent
+[puppet-quest-guide]: https://github.com/puppetlabs/puppet-quest-guide
