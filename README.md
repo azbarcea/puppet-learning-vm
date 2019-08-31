@@ -173,7 +173,10 @@ The version `6.10-0` was used because `6.10` comes from the official `puppet-201
 ```
 GuestAdditions versions on your host (6.0.10) and guest (6.0.6) do not match
 ```
-* No IP for `eth1`, you'll see something like:
+
+##  No IP for `eth1`
+
+You'll see something like:
 ```
 3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
     link/ether 08:00:27:68:fe:a9 brd ff:ff:ff:ff:ff:ff
@@ -182,13 +185,21 @@ GuestAdditions versions on your host (6.0.10) and guest (6.0.6) do not match
 ```
 In this case just restart the VM:
 ```
-vagrant halt
-vagrant up
+vagrant reload
+```
+
+## Cannot access Puppet Console UI
+
+That's because some services are broken. Get into VM and restart the services:
+```
+$ vagrant ssh learning
+$ sudo su -
+# systemctl restart pe-*
 ```
 
 # References
 
-* [puppet-in-docker][https://github.com/puppetlabs/puppet-in-docker]
+* [Puppet In Docker][puppet-in-docker]
 
 ----
 
@@ -197,3 +208,4 @@ vagrant up
 [puppet-forge-server]: https://github.com/kjhenner/puppet-forge-server.git
 [pltraining-dockeragent]: https://github.com/puppetlabs/pltraining-dockeragent
 [puppet-quest-guide]: https://github.com/puppetlabs/puppet-quest-guide
+[puppet-in-docker]: https://github.com/puppetlabs/puppet-in-docker
