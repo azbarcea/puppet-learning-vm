@@ -1,6 +1,6 @@
 # vim: set filetype=ruby:
 
-require 'yaml'
+require 'yaml'   
 require 'vagrant-hostmanager'
 require 'vagrant-vbguest' unless defined? VagrantVbguest::Config
 #require 'pp'
@@ -37,6 +37,10 @@ Vagrant.configure("2") do |config|
   
   # configure network
   config.vm.network "private_network", type: "dhcp"
+  # Following port rules are to be used by external agents to connect to this VM
+  #   more: https://puppet.com/docs/pe/2018.1/system_configuration.html
+  config.vm.network "forwarded_port", guest: 8140, host: 8140
+  config.vm.network "forwarded_port", guest: 8142, host: 8142
 
   # configure shared folder - for Development
   config.vm.synced_folder ".", "/vagrant", disabled: true
