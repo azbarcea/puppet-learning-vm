@@ -1,0 +1,7 @@
+[puppet6]
+name=Puppet 6 Repository el 7 - $basearch
+baseurl=http://yum.puppetlabs.com/puppet6/el/7/$basearch
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-puppet6-release
+enabled=1
+gpgcheck=1
+
