@@ -12,6 +12,10 @@ puppetmaster:
   hostname: learning
   memory: 4096
   cores: 2
+  public_network:
+    bridge:
+      - wlp59s0
+    use_dhcp_assigned_default_route: true
 
 instances:
   - box: ubuntu/bionic64

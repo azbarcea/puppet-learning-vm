@@ -1,9 +1,9 @@
 # vim: set filetype=ruby:
 
 require 'yaml'   
-require 'vagrant-hostmanager'
-require 'vagrant-vbguest' unless defined? VagrantVbguest::Config
-#require 'pp'
+#require 'vagrant-hostmanager'
+#require 'vagrant-vbguest' unless defined? VagrantVbguest::Config
+require 'pp'
 
 # Load configuration data from 'vagrant.yaml'
 configuration_file = File.expand_path("vagrant.yaml", File.dirname(__FILE__))
@@ -26,21 +26,23 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  check_dependency 'vagrant-vbguest'
-  check_dependency 'vagrant-hostmanager'
+  # check_dependency 'vagrant-vbguest'
+  # check_dependency 'vagrant-hostmanager'
 
   # configure image
   config.vm.box              = settings['box']
   config.vm.box_check_update = settings['box_check_update']
   config.ssh.insert_key      = settings['ssh_insert_key']
-  config.vbguest.auto_update = settings['auto_update']
+  # config.vbguest.auto_update = settings['auto_update']
   
   # configure network
-  config.vm.network "private_network", type: "dhcp"
-  # Following port rules are to be used by external agents to connect to this VM
-  #   more: https://puppet.com/docs/pe/2018.1/system_configuration.html
-  config.vm.network "forwarded_port", guest: 8140, host: 8140
-  config.vm.network "forwarded_port", guest: 8142, host: 8142
+  #config.vm.network "private_network", type: "dhcp"
+  if settings.has_key? 'public_network'
+    config.vm.network "public_network", 
+      bridge: settings['public_network']['bridge'], 
+      use_dhcp_assigned_default_route: settings['public_network']['use_dhcp_assigned_default_route']
+  end
+
 
   # configure shared folder - for Development
   config.vm.synced_folder ".", "/vagrant", disabled: true

@@ -54,6 +54,12 @@ root@learning: # ip addr show
 
 `172.28.128.8` from `eth1` is the IP that you care. Everytime you reboot the VM, you may get a different IP.
 
+To list the available network interfaces:
+```
+nmcli d | grep connected | awk '{print $1}'
+``
+
+
 To use the [Quest Guide UI](https://github.com/puppetlabs/puppet-quest-guide), go to: http://172.28.128.8/ (replace with your own IP). You should be able to see:
 ```
 Quest Guide for the Puppet Learning VM
